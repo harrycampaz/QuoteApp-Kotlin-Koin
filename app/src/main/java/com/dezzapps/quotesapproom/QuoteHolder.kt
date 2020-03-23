@@ -6,8 +6,11 @@ import kotlinx.android.synthetic.main.item_quotes.view.*
 
 class QuoteHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
-    fun bind(){
-        itemView.tv_item.text = "Frase"
+    fun bind(quote: Quote){
+
+        with(itemView){
+            tv_item.text = quote.text
+        }
     }
 
 }

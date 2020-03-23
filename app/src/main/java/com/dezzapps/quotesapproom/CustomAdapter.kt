@@ -1,18 +1,32 @@
 package com.dezzapps.quotesapproom
 
+import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class CustomAdapter(val quoteList: List<Quote>): RecyclerView.Adapter<QuoteHolder>() {
+class CustomAdapter(val quoteList: ArrayList<Quote> = arrayListOf()): RecyclerView.Adapter<QuoteHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuoteHolder {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_quotes, parent, false)
+
+        return QuoteHolder(view)
+
     }
 
     override fun getItemCount(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+        return  quoteList.size
+
     }
 
     override fun onBindViewHolder(holder: QuoteHolder, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+        holder.bind(quoteList[position])
+    }
+
+    fun add(quote: Quote){
+        quoteList.add(quote)
+        notifyDataSetChanged()
+
     }
 }
