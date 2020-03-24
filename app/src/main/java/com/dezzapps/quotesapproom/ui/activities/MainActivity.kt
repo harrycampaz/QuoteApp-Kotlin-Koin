@@ -1,14 +1,21 @@
-package com.dezzapps.quotesapproom
+package com.dezzapps.quotesapproom.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.dezzapps.quotesapproom.model.Quote
+import com.dezzapps.quotesapproom.R
+import com.dezzapps.quotesapproom.ui.adapter.CustomAdapter
+import com.dezzapps.quotesapproom.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var mainActivityViewModel: MainActivityViewModel
     private val adapter: CustomAdapter by lazy {
         CustomAdapter()
     }
@@ -20,11 +27,22 @@ class MainActivity : AppCompatActivity() {
         rv_quote.layoutManager = LinearLayoutManager(this)
         rv_quote.adapter = adapter
 
-        adapter.add(Quote(1, "Here you are 1"))
-        adapter.add(Quote(2, "Here you are 2"))
-        adapter.add(Quote(3, "Here you are 3"))
+        mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
 
-        tv_count.text = "Count 2"
+        mainActivityViewModel.getAllQuotes().observe(this, Observer {
+
+            if(it.isEmpty()){
+                tv_count.text = getString(R.string.no_data)
+                
+                return@Observer
+            }
+           adapter.addAll(it)
+
+        })
+
+
+        mainActivityViewModel.loadAllData()
+
 
     }
 
