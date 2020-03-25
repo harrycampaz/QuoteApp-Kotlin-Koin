@@ -1,5 +1,6 @@
 package com.dezzapps.quotesapproom.data
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -12,5 +13,5 @@ interface QuoteDao {
     fun insert(quote: Quote)
 
     @Query("select * from quotes")
-    fun getAll(): List<Quote>
+    fun getAll(): LiveData<List<Quote>>
 }

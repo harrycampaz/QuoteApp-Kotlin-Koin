@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -39,10 +40,18 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
 
     implementation "android.arch.persistence.room:runtime:1.1.1"
-    implementation "android.arch.persistence.room:rxjava2:1.1.1"
+
+    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
+
+    kapt  "android.arch.persistence.room:compiler:1.1.1"
 
     // ViewModel and livedata
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
     implementation "com.google.android.material:material:1.1.0-alpha02"
+
+    // Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.2.1'
+
 
 }

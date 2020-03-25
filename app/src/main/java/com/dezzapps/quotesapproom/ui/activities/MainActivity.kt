@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dezzapps.quotesapproom.model.Quote
 import com.dezzapps.quotesapproom.R
+import com.dezzapps.quotesapproom.data.DatabaseHelper
+import com.dezzapps.quotesapproom.data.QuoteDao
 import com.dezzapps.quotesapproom.ui.adapter.CustomAdapter
 import com.dezzapps.quotesapproom.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -19,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     private val adapter: CustomAdapter by lazy {
         CustomAdapter()
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,16 +36,12 @@ class MainActivity : AppCompatActivity() {
 
             if(it.isEmpty()){
                 tv_count.text = getString(R.string.no_data)
-                
+
                 return@Observer
             }
            adapter.addAll(it)
 
         })
-
-
-        mainActivityViewModel.loadAllData()
-
 
     }
 
@@ -53,6 +52,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == R.id.add_action){
+
+            mainActivityViewModel.saveQuotes(Quote(text = "Mi primera frase"))
 
         }
 
