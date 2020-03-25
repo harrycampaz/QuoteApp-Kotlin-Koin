@@ -2,4 +2,5 @@
     <string name="app_name">QuotesAppRoom</string>
     <string name="add_quote">Add Quote</string>
     <string name="no_data">No data</string>
+    <string name="count">"Contador: "</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.dezzapps.quotesapproom.ui.activities
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -39,6 +41,7 @@ class MainActivity : AppCompatActivity() {
 
                 return@Observer
             }
+            tv_count.text = getString(R.string.count) + it.size
            adapter.addAll(it)
 
         })
