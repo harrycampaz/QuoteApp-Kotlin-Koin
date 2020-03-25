@@ -6,7 +6,6 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 29
 
-
     defaultConfig {
         applicationId "com.dezzapps.quotesapproom"
         minSdkVersion 21
@@ -23,6 +22,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    viewBinding.enabled = true
+
 
 }
 

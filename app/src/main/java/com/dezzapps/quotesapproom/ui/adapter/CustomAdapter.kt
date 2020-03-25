@@ -7,12 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dezzapps.quotesapproom.model.Quote
 import com.dezzapps.quotesapproom.R
 import com.dezzapps.quotesapproom.ui.holder.QuoteHolder
+import com.dezzapps.quotesapproom.databinding.ItemQuotesBinding
 
 class CustomAdapter(val quoteList: ArrayList<Quote> = arrayListOf()): RecyclerView.Adapter<QuoteHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuoteHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_quotes, parent, false)
-
-        return QuoteHolder(view)
+        val itemQuotesBinding = ItemQuotesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return QuoteHolder(itemQuotesBinding)
 
     }
 
@@ -27,11 +27,6 @@ class CustomAdapter(val quoteList: ArrayList<Quote> = arrayListOf()): RecyclerVi
         holder.bind(quoteList[position])
     }
 
-    fun add(quote: Quote){
-        quoteList.add(quote)
-        notifyDataSetChanged()
-
-    }
 
     fun addAll(quote: List<Quote>){
         quoteList.addAll(quote)

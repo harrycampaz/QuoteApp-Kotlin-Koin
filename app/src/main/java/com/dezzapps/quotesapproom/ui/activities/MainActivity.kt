@@ -8,17 +8,22 @@ import android.view.MenuItem
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewbinding.ViewBinding
 import com.dezzapps.quotesapproom.model.Quote
 import com.dezzapps.quotesapproom.R
 import com.dezzapps.quotesapproom.data.DatabaseHelper
 import com.dezzapps.quotesapproom.data.QuoteDao
+import com.dezzapps.quotesapproom.databinding.ActivityMainBinding
+
 import com.dezzapps.quotesapproom.ui.adapter.CustomAdapter
 import com.dezzapps.quotesapproom.viewmodel.MainActivityViewModel
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mainActivityViewModel: MainActivityViewModel
+
+    private lateinit var activityMainBinding: ActivityMainBinding
+
     private val adapter: CustomAdapter by lazy {
         CustomAdapter()
     }
@@ -27,21 +32,23 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+       // setContentView(R.layout.activity_main)
+        activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(activityMainBinding.root)
 
-        rv_quote.layoutManager = LinearLayoutManager(this)
-        rv_quote.adapter = adapter
+        activityMainBinding.rvQuote.layoutManager = LinearLayoutManager(this)
+        activityMainBinding.rvQuote.adapter = adapter
 
         mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
 
         mainActivityViewModel.getAllQuotes().observe(this, Observer {
 
             if(it.isEmpty()){
-                tv_count.text = getString(R.string.no_data)
+                activityMainBinding.tvCount.text = getString(R.string.no_data)
 
                 return@Observer
             }
-            tv_count.text = getString(R.string.count) + it.size
+            activityMainBinding.tvCount.text = getString(R.string.count) + it.size
            adapter.addAll(it)
 
         })
